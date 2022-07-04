@@ -17,17 +17,17 @@ const mysql = require('mysql2');
 // add deparments
 // quit
 
-// const db = mysql.createConnection(
-//   {
-//     host: 'localhost',
-//     // MySQL username,
-//     user: 'root',
-//     // TODO: Add MySQL password here
-//     password: 'Password123',
-//     database: 'employtrack_db'
-//   },
-//   console.log(`Connected to the employtrack database.`)
-// );
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    // MySQL username,
+    user: 'root',
+    // TODO: Add MySQL password here
+    password: 'Password123',
+    database: 'employtrack_db'
+  },
+  console.log(`Connected to the employtrack database.`)
+);
 
 // const teamMemberObjArr = []
 
