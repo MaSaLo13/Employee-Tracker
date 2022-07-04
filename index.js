@@ -97,7 +97,7 @@ function updateRole() {
   };
 
 function viewRoles() {
-  db.query("SELECT title, salary FROM roles", function (err, data) {
+  db.query("SELECT roles.id as ID, roles.title as title, department.name as Department, roles.salary as Salary  FROM roles LEFT JOIN department ON roles.department_id = department.id;", function (err, data) {
     console.log(data);
     if (err) throw err;
           init();
