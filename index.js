@@ -29,8 +29,6 @@ const db = mysql.createConnection(
   console.log(`Connected to the employtrack database.`)
 );
 
-// const teamMemberObjArr = []
-
 const init  = () => {
         inquirer.prompt([
             {
@@ -40,108 +38,98 @@ const init  = () => {
                 choices: ['View All Employees', 'Add Employee', "Update Employee Role", "View All Roles", "View All Departments", "Add Department", "Quit"],
             },
         ])
+
         .then(answer => {
             switch (answer.choice) {
-                case 'Employee':
-                    showEmployee()
+                case 'View All Employees':
+                    viewEmployee();
                     break;
 
-                case 'UpdateRole':
-                    createIntern()
+                case 'Add Employee':
+                    addEmployee()
                     break;
 
-                default:
-                    buildTeam()
+                case 'Update Employee Role':
+                    updateRole()
                     break;
+
+                case 'View All Roles':
+                    viewRoles();
+                    break;
+  
+                case 'View All Departments':
+                    viewDept()
+                    break;
+  
+                case 'Add Deparment':
+                    addDept()
+                    break;
+                
+                // case 'Quit':
+                //     addDept()
+                //     break;
             }
         });
     };
 
+function viewEmployee() {
+  db.query("SELECT * FROM employee", function (err, data) {
+    console.log(data);
+    if (err) throw err;
+          init();
+      });
+  };
 
+function addEmployee() {
+  db.query("SELECT * FROM employee", function (err, data) {
+    console.log(data);
+    if (err) throw err;
+          init();
+        });
+  }; 
 
-  
-//     function createEngineer() {
-//         inquirer.prompt([
-//             {
-//               type: 'input',
-//               name: 'id',
-//               message: 'What is the engineers id?',
-//             },
-//             {
-//               type: 'input',
-//               name: 'name',
-//               message: 'What is the engineers name?',
-//             }, 
-//             {
-//               type: 'input',
-//               name: 'email',
-//               message: 'What is the engineers email?',
-//             }, 
-//             {
-//                 type: 'input',
-//                 name: 'Github',
-//                 message: 'What is the engineers Github?',
-//               },
-//           ])
-//           .then(answers => {
-//             const engineer = new Engineer (
-//                 answers.id,
-//                 answers.name,
-//                 answers.email,
-//                 answers.Github,
-//             )
-//             teamMemberObjArr.push(engineer)
-//             addEmployees()
-//           });
+function updateRole() {
+  db.query("SELECT * FROM employee", function (err, data) {
+    console.log(data);
+    if (err) throw err;
+           init();
+          });
+  };
 
-//     }
+function viewRoles() {
+  db.query("SELECT title, salary FROM roles", function (err, data) {
+    console.log(data);
+    if (err) throw err;
+          init();
+          });
+  }; 
 
-//     function createIntern() {
-//         inquirer.prompt([
-//             {
-//               type: 'input',
-//               name: 'id',
-//               message: 'What is the interns id?',
-//             },
-//             {
-//               type: 'input',
-//               name: 'name',
-//               message: 'What is the interns name?',
-//             },
-//             {
-//               type: 'input',
-//               name: 'email',
-//               message: 'What is the interns email?',
-//             },
-//             {
-//                 type: 'input',
-//                 name: 'school',
-//                 message: 'What is the interns school?',
-//               },
-//           ])
-//           .then(answers => {
-//             const intern = new Intern (
-//                 answers.id,
-//                 answers.name,
-//                 answers.email,
-//                 answers.school,
-//             )
-//             teamMemberObjArr.push(intern)
-//             addEmployees()
-//           });
+function viewDept() {
+  db.query("SELECT * FROM department", function (err, data) {
+    console.log(data);
+    if (err) throw err;
+          init();
+          });
+  }; 
 
-//     };
-    
-        
-//     function buildTeam() {
-//         fs.writeFile("./dist/index.html", renderTeam(teamMemberObjArr), "utf-8")
-//         // .then(() => console.log('Successfully wrote to index.html'))
-//         // .catch((err) => console.error(err));
-
-//     };
-
-//     createManager();
-
-// };
+function addDept() {
+  db.query("SELECT * FROM employee", function (err, data) {
+    console.log(data);
+    if (err) throw err;
+          init();
+          });
+  }; 
 
 init();
+
+// Query database 12/22 will show table 
+// db.query('SELECT * FROM favorite_books', function (err, results) {
+//   console.log(results);
+// });
+
+  // Logs goodbye and exits the node app
+//   quit() {
+//     console.log("\nGoodbye!");
+//     process.exit(0);
+//   }
+// }
