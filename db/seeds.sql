@@ -6,12 +6,6 @@ VALUES ("Engineering"),
        ("Legal"),
        ("Sales");
 
-CREATE TABLE roles (
-id: INT PRIMARY KEY,
-title: VARCHAR(30),
-salary: DECIMAL,
-department_id: INT
-);
 
 INSERT INTO department (title, salary, department_id)
 VALUES ("Sales Lead", 100,000),
@@ -25,12 +19,11 @@ VALUES ("Sales Lead", 100,000),
 
 
 CREATE TABLE employee (
-id: INT PRIMARY KEY
-
+id: INT PRIMARY KEY,
 first_name: VARCHAR(30),
-
 last_name: VARCHAR(30),
-
 role_id: INT,
+manager_id: INT);
 
-manager_id: INT
+INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+VALUES ("John, Doe, Sales")
