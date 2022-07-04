@@ -1,7 +1,8 @@
 const inquirer = require('inquirer');
 // const fs = require('fs');
 const mysql = require('mysql2');
-// const Manager = require("./lib/Manager");
+// const Employee = require(".db/query.sql");
+// const showEmployee = require("")
 // const AddEmployee = require("./lib/AddEmployee")
 // const UpdateRole = require("./lib/UpdateRole")
 // const renderTeam = require("./src/html-templates");
@@ -16,17 +17,17 @@ const mysql = require('mysql2');
 // add deparments
 // quit
 
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    // MySQL username,
-    user: 'root',
-    // TODO: Add MySQL password here
-    password: 'Password123',
-    database: 'employtrack_db'
-  },
-  console.log(`Connected to the employtrack database.`)
-);
+// const db = mysql.createConnection(
+//   {
+//     host: 'localhost',
+//     // MySQL username,
+//     user: 'root',
+//     // TODO: Add MySQL password here
+//     password: 'Password123',
+//     database: 'employtrack_db'
+//   },
+//   console.log(`Connected to the employtrack database.`)
+// );
 
 // const teamMemberObjArr = []
 
@@ -36,13 +37,13 @@ const init  = () => {
                 type: 'list',
                 message: 'What would you like to do?',
                 name: 'choice',
-                choices: ['AddEmployee', 'UpdateRole', "I'm Done"],
+                choices: ['View All Employees', 'Add Employee', "Update Employee Role", "View All Roles", "View All Departments", "Add Department", "Quit"],
             },
         ])
         .then(answer => {
             switch (answer.choice) {
-                case 'AddEmployee':
-                    createEngineer()
+                case 'Employee':
+                    showEmployee()
                     break;
 
                 case 'UpdateRole':
@@ -56,6 +57,9 @@ const init  = () => {
         });
     };
 
+
+
+  
 //     function createEngineer() {
 //         inquirer.prompt([
 //             {
