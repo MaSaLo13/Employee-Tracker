@@ -127,13 +127,16 @@ function addDept() {
   .then(function(answer) {
     db.query ("INSERT INTO department (name) VALUES ('?')"),
     [answer.department]
-  })
+  });
+  init()
     // .then( 
     //   db.query(
     //     `INSERT INTO department VALUES (DEFAULT, name)`,
     //   )
     // )
  };
+
+
 init();
 
 
