@@ -1,21 +1,6 @@
 const inquirer = require('inquirer');
 // const fs = require('fs');
 const mysql = require('mysql2');
-// const Employee = require(".db/query.sql");
-// const showEmployee = require("")
-// const AddEmployee = require("./lib/AddEmployee")
-// const UpdateRole = require("./lib/UpdateRole")
-// const renderTeam = require("./src/html-templates");
-// const tests = require("./__tests__");
-// const tests1 = new tests(); 
-// view all employees needs seeds? schema?
-// addEmployee
-// update Employee role
-// View all roles needs seeds? schema?
-// add role 
-// View all departments  needs seeds? schema?
-// add deparments
-// quit
 
 const db = mysql.createConnection(
   {
@@ -61,8 +46,8 @@ const init  = () => {
                     viewDept()
                     break;
   
-                case 'Add Deparment':
-                    addDept()
+                case 'Add Department':
+                    addDept();
                     break;
                 
                 // case 'Quit':
@@ -81,7 +66,8 @@ function viewEmployee() {
   };
 
 function addEmployee() {
-  db.query("SELECT * FROM employee", function (err, data) {
+  db.query(`INSERT INTO movies (movie_name)
+  VALUES (?)`, function (err, data) {
     console.log(data);
     if (err) throw err;
           init();
@@ -112,20 +98,41 @@ function viewDept() {
           });
   }; 
 
-function addDept() {
-  db.query("SELECT * FROM employee", function (err, data) {
-    console.log(data);
-    if (err) throw err;
-          init();
-          });
-  }; 
+// function addDept() {
+//   db.query(`INSERT INTO department (name) VALUES (?)`, function (err, data) {
+//     console.log(data);
+//     if (err) throw err;
+//           init();
+//           });
+//   }; 
 
+// function addDept() {
+//   inquirer.prompt([
+//     {
+//       type:'input',
+//       name:'dept',
+//       message:'What is the name of the department?'
+//     }
+//   ])
+// }
+
+function addDept() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'department',
+      message: 'What is the name of the department?'
+    }
+    // .then( 
+    //   db.query(
+    //     `INSERT INTO department VALUES (DEFAULT, name)`,
+    //   )
+    // )
+  ])
+
+ }
 init();
 
-// Query database 12/22 will show table 
-// db.query('SELECT * FROM favorite_books', function (err, results) {
-//   console.log(results);
-// });
 
   // Logs goodbye and exits the node app
 //   quit() {
