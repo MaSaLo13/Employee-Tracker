@@ -123,14 +123,17 @@ function addDept() {
       name: 'department',
       message: 'What is the name of the department?'
     }
+  ])
+  .then(function(answer) {
+    db.query ("INSERT INTO department (name) VALUES ('?')"),
+    [answer.department]
+  })
     // .then( 
     //   db.query(
     //     `INSERT INTO department VALUES (DEFAULT, name)`,
     //   )
     // )
-  ])
-
- }
+ };
 init();
 
 
