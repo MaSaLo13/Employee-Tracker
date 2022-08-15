@@ -202,12 +202,12 @@ function addDept() {
 };
 
 
+  // Logs goodbye and exits the node app
+  function exit() {
+    console.log("\nGoodbye!");
+    process.exit(0);
+  }
+
 init();
 
 
-  // Logs goodbye and exits the node app
-//   quit() {
-//     console.log("\nGoodbye!");
-//     process.exit(0);
-//   }
-// }
