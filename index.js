@@ -125,8 +125,8 @@ function addDept() {
     }
   ])
   .then(function(answer) {
-    db.query ("INSERT INTO department (name) VALUES ('?')"),
-    [answer.department]
+    let department = {name:answer.department};
+    db.query ("INSERT INTO department SET ?;", department)
   });
   init()
     // .then( 
