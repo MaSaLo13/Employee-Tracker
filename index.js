@@ -20,7 +20,7 @@ const init = () => {
       type: 'list',
       message: 'What would you like to do?',
       name: 'choice',
-      choices: ['View All Employees', 'Add Employee', "Update Employee Role", "View All Roles", "View All Departments", "Add Department", "Quit"],
+      choices: ['View All Employees', 'Add Employee', "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "Quit"],
     },
   ])
 
@@ -89,8 +89,8 @@ function addEmployee() {
     // },
     {
       type: 'list',
-      name: 'role_id',
-      message: 'What is the employees role_id?',
+      name: 'role',
+      message: 'What is the employees role?',
       choices: ["1", "2", "3", "4", "5", "6", "7", "8"],
     },
     // {
@@ -104,7 +104,7 @@ function addEmployee() {
       //*Need to add role name and then find length of role array to add ID #
       let fN = answer.first_name;
       let lN = answer.last_name;
-      let role_id = answer.role_id;
+      let role_id = answer.role;
       // let manager = answer.Manager;
 
       let addNewEmployee = { first_name: fN, last_name: lN, role_id: role_id }
@@ -147,22 +147,33 @@ function addRole() {
   inquirer.prompt([
     {
       type: 'input',
-      name: 'roleName',
-      message: "What is the name of the role?"
+      name: 'title',
+      message: "What is the title?"
     },
     {
       type: 'input',
       name: 'salary',
       message: "What is the salary of the role?"
     },
-    {
-      type: 'list',
-      name: 'Department',
-      message: 'Which department does the role belong to?',
-      choices: ["Engineering", "Finance", "Legal", "Sales"],
-    },
+    // {
+    //   type: 'list',
+    //   name: 'department',
+    //   message: 'Which department does the role belong to?',
+    //   choices: ["Engineering", "Finance", "Legal", "Sales"],
+    // },
 
   ])
+  .then(function (answer) {
+    //*Need to add role name and then find length of role array to add ID #
+    let role = answer.title;
+    let salary = answer.salary;
+    let dept = answer.department;
+    // let manager = answer.Manager;
+
+    let addNewRole = { title: role, salary: salary }
+    db.query('INSERT INTO roles SET ?', addNewRole)
+    init();
+  })
 }
 
 function viewDept() {
