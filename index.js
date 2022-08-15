@@ -78,13 +78,13 @@ function addEmployee() {
         message: "what is the employee's last name?"
       },
       {
-        type: 'choice',
+        type: 'list',
         name: 'Role',
         message: 'What is the employees role?',
         choices: ["Sales Lead", "Sales Person", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"],
       },
       {
-        type: 'choice',
+        type: 'list',
         name: 'Manager',
         message: 'What is the employees manager?',
         choices: ["None", "John Doe", "Ashley Rodriguez", "Kunal Singh", "Sarah Lourd"],
@@ -97,12 +97,6 @@ function addEmployee() {
 			let role = answer.Role;
       let manager = answer.Manager;
 
-			//* Take information and build new role constructor
-			// console.log(`
-			// -------------------------------------------------------------------------------------------------
-			// Adding New Role | Role Title: ${newRoleName} | Role Salary ${newRoleSalary} | Role ID ${newRoleID} to Database!
-			// -------------------------------------------------------------------------------------------------
-			// `);
 			let addNewEmployee = {first_name:fN, last_name:lN, role:role, manager:manager};
 			db.promise().query('INSERT INTO employee SET ?', addNewEmployee)})
     
