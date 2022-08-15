@@ -41,6 +41,10 @@ const init  = () => {
                 case 'View All Roles':
                     viewRoles();
                     break;
+
+                case 'Add Role':
+                    addRole()
+                    break;
   
                 case 'View All Departments':
                     viewDept()
@@ -50,9 +54,9 @@ const init  = () => {
                     addDept();
                     break;
                 
-                // case 'Quit':
-                //     addDept()
-                //     break;
+                case 'Quit':
+                    exit();
+                    break;
             }
         });
     };
@@ -77,28 +81,36 @@ function addEmployee() {
         name: 'last_name',
         message: "what is the employee's last name?"
       },
+      // {
+      //   type: 'list',
+      //   name: 'Role',
+      //   message: 'What is the employees role?',
+      //   choices: ["Sales Lead", "Sales Person", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"],
+      // },
       {
         type: 'list',
-        name: 'Role',
-        message: 'What is the employees role?',
-        choices: ["Sales Lead", "Sales Person", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"],
+        name: 'role_id',
+        message: 'What is the employees role_id?',
+        choices: ["1", "2", "3", "4", "5", "6", "7", "8"],
       },
-      {
-        type: 'list',
-        name: 'Manager',
-        message: 'What is the employees manager?',
-        choices: ["None", "John Doe", "Ashley Rodriguez", "Kunal Singh", "Sarah Lourd"],
-      },
+      // {
+      //   type: 'list',
+      //   name: 'Manager',
+      //   message: 'What is the employees manager?',
+      //   choices: ["None", "John Doe", "Ashley Rodriguez", "Kunal Singh", "Sarah Lourd"],
+      // },
     ])
     .then(function(answer) {
 			//*Need to add role name and then find length of role array to add ID #
 			let fN = answer.first_name;
 			let lN = answer.last_name;
-			let role = answer.Role;
-      let manager = answer.Manager;
+			let role_id = answer.role_id;
+      // let manager = answer.Manager;
 
-			let addNewEmployee = {first_name:fN, last_name:lN, role:role, manager:manager};
-			db.promise().query('INSERT INTO employee SET ?', addNewEmployee)})
+			let addNewEmployee = {first_name:fN, last_name:lN, role_id:role_id};
+			db.query('INSERT INTO employee SET ?', addNewEmployee)
+    })
+    init()
     
   }; 
 
