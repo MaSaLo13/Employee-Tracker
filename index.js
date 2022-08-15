@@ -133,6 +133,28 @@ function viewRoles() {
           });
   }; 
 
+  function addRole() {
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'roleName',
+        message: "What is the name of the role?"
+      },
+      {
+        type: 'input',
+        name: 'salary',
+        message: "What is the salary of the role?"
+      },
+      {
+        type: 'list',
+        name: 'Department',
+        message: 'Which department does the role belong to?',
+        choices: ["Engineering", "Finance", "Legal", "Sales"],
+      },
+    
+    ])
+  }
+
 function viewDept() {
   db.query("SELECT * FROM department", function (err, data) {
     console.log(data);
