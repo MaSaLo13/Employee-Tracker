@@ -66,13 +66,62 @@ function viewEmployee() {
   };
 
 function addEmployee() {
-  db.query(`INSERT INTO movies (movie_name)
-  VALUES (?)`, function (err, data) {
-    console.log(data);
-    if (err) throw err;
-          init();
-        });
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'first_name',
+        message: "What is the employee's first name?"
+      },
+      {
+        type: 'input',
+        name: 'last_name',
+        message: "what is the employee's last name?"
+      },
+      {
+        type: 'choice',
+        name: 'Role',
+        message: 'What is the employees role?',
+        choices: ["Sales Lead", "Sales Person", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"],
+      },
+      {
+        type: 'choice',
+        name: 'Manager',
+        message: 'What is the employees manager?',
+        choices: ["None", "John Doe", "Ashley Rodriguez", "Kunal Singh", "Sarah Lourd"],
+      },
+    ])
+    .then(function(answer) {
+			//*Need to add role name and then find length of role array to add ID #
+			let fN = answer.first_name;
+			let lN = answer.last_name;
+			let role = answer.Role;
+      let manager = answer.Manager;
+
+			//* Take information and build new role constructor
+			// console.log(`
+			// -------------------------------------------------------------------------------------------------
+			// Adding New Role | Role Title: ${newRoleName} | Role Salary ${newRoleSalary} | Role ID ${newRoleID} to Database!
+			// -------------------------------------------------------------------------------------------------
+			// `);
+			let addNewEmployee = {first_name:fN, last_name:lN, role:role, manager:manager};
+			db.promise().query('INSERT INTO employee SET ?', addNewEmployee)})
+    
   }; 
+
+  // function addDept() {
+  //   inquirer.prompt([
+  //     {
+  //       type: 'input',
+  //       name: 'department',
+  //       message: 'What is the name of the department?'
+  //     }
+  //   ])
+  //   .then(function(answer) {
+  //     let department = {name:answer.department};
+  //     db.query ("INSERT INTO department SET ?;", department)
+  //   });
+  //   init()
+  //  };
 
 function updateRole() {
   db.query("SELECT * FROM employee", function (err, data) {
@@ -98,24 +147,6 @@ function viewDept() {
           });
   }; 
 
-// function addDept() {
-//   db.query(`INSERT INTO department (name) VALUES (?)`, function (err, data) {
-//     console.log(data);
-//     if (err) throw err;
-//           init();
-//           });
-//   }; 
-
-// function addDept() {
-//   inquirer.prompt([
-//     {
-//       type:'input',
-//       name:'dept',
-//       message:'What is the name of the department?'
-//     }
-//   ])
-// }
-
 function addDept() {
   inquirer.prompt([
     {
@@ -129,11 +160,6 @@ function addDept() {
     db.query ("INSERT INTO department SET ?;", department)
   });
   init()
-    // .then( 
-    //   db.query(
-    //     `INSERT INTO department VALUES (DEFAULT, name)`,
-    //   )
-    // )
  };
 
 
