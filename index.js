@@ -85,7 +85,7 @@ function addEmployee() {
     },
     // {
     //   type: 'list',
-    //   name: 'Role',
+    //   name: 'title',
     //   message: 'What is the employees role?',
     //   choices: ["Sales Lead", "Sales Person", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"],
     // },
@@ -95,39 +95,24 @@ function addEmployee() {
       message: 'What is the employees role?',
       choices: ["1", "2", "3", "4", "5", "6", "7", "8"],
     },
-    // {
-    //   type: 'list',
-    //   name: 'Manager',
-    //   message: 'What is the employees manager?',
-    //   choices: ["None", "John Doe", "Ashley Rodriguez", "Kunal Singh", "Sarah Lourd"],
-    // },
+    {
+      type: 'list',
+      name: 'Manager',
+      message: 'What is the employees manager?',
+      choices: ["None", "1", "3", "5", "7"],
+    },
   ])
     .then(function (answer) {
-      //*Need to add role name and then find length of role array to add ID #
       let fN = answer.first_name;
       let lN = answer.last_name;
-      let role_id = answer.role;
-      // let manager = answer.Manager;
-
-      let addNewEmployee = { first_name: fN, last_name: lN, role_id: role_id }
+      let title = answer.role;
+      let manager = answer.Manager;
+      let addNewEmployee = { first_name: fN, last_name: lN, role_id: title, manager_id: manager }
       db.query('INSERT INTO employee SET ?', addNewEmployee)
+      console.log("Added " + fN + lN + "as new employee")
       init();
     })
 };
-// function addDept() {
-//   inquirer.prompt([
-//     {
-//       type: 'input',
-//       name: 'department',
-//       message: 'What is the name of the department?'
-//     }
-//   ])
-//   .then(function(answer) {
-//     let department = {name:answer.department};
-//     db.query ("INSERT INTO department SET ?;", department)
-//   });
-//   init()
-//  };
 
 function updateRole() {
   db.query("SELECT * FROM employee", function (err, data) {
@@ -163,6 +148,12 @@ function addRole() {
     //   message: 'Which department does the role belong to?',
     //   choices: ["Engineering", "Finance", "Legal", "Sales"],
     // },
+    {
+      type: 'list',
+      name: 'department',
+      message: 'Which department does the role belong to?',
+      choices: ["1", "2", "3", "4"],
+    },
 
   ])
   .then(function (answer) {
@@ -170,10 +161,10 @@ function addRole() {
     let role = answer.title;
     let salary = answer.salary;
     let dept = answer.department;
-    // let manager = answer.Manager;
 
-    let addNewRole = { title: role, salary: salary }
+    let addNewRole = { title: role, salary: salary, department_id: dept }
     db.query('INSERT INTO roles SET ?', addNewRole)
+    console.log("Added " + role + " into database ")
     init();
   })
 }
@@ -197,6 +188,7 @@ function addDept() {
     .then(function (answer) {
       let department = { name: answer.department };
       db.query("INSERT INTO department SET ?;", department)
+      console.log("Added " + answer.department + " into the database. ")
       init()
     });
 };
@@ -210,4 +202,27 @@ function addDept() {
 
 init();
 
-
+//use this for adding employee role?
+// if (answer.role === 'string') {
+//   switch (input) {
+//     case 'Sales Lead':
+//       response = '1';
+//       break;
+//     case 'Sales Person':
+//       response = '2';
+//       break;
+//     case 'Lead Engineer':
+//       response = '3';
+//       break;
+//     case 'Software Engineer':
+//       response = '4';
+//       break;
+//     case 'Account Manager':
+//       response = '5';
+//       break;
+//     case 'Accountant':
+//       response = '6';
+//       break;
+//   }
+// }
+//   return response;
