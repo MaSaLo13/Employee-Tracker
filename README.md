@@ -23,6 +23,7 @@ In order to use Employee-Tracker, you need to open terminal and type node index.
 - Selecting Add Employee will let you add a new employee
 - Add Department will let you add a new department 
 - Selecting Quit will exit you from Employee-Tracker
+
 You can watch the video for a visual explanation on what you can do with Employee Tracker. 
 
  ## Questions
