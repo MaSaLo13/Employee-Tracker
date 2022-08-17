@@ -99,7 +99,7 @@ function addEmployee() {
       type: 'list',
       name: 'Manager',
       message: 'What is the employees manager?',
-      choices: ["None", "1", "3", "5", "7"],
+      choices: ["1", "3", "5", "7"],
     },
   ])
     .then(function (answer) {
@@ -202,7 +202,8 @@ function addDept() {
 
 init();
 
-//use this for adding employee role?
+//use this for adding employee role? 
+// kept getting unreachable code after putting inside addEmployee()
 // if (answer.role === 'string') {
 //   switch (input) {
 //     case 'Sales Lead':
