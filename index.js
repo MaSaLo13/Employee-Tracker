@@ -22,7 +22,7 @@ const init = () => {
       type: 'list',
       message: 'What would you like to do?',
       name: 'choice',
-      choices: ['View All Employees', 'Add Employee', "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "Quit"],
+      choices: ['View All Employees', 'Add Employee', "View All Roles", "Add Role", "View All Departments", "Add Department", "Quit"],
     },
   ])
 
@@ -36,9 +36,9 @@ const init = () => {
           addEmployee()
           break;
 
-        case 'Update Employee Role':
-          updateRole()
-          break;
+        // case 'Update Employee Role':
+        //   updateRole()
+        //   break;
 
         case 'View All Roles':
           viewRoles();
@@ -114,13 +114,13 @@ function addEmployee() {
     })
 };
 
-function updateRole() {
-  db.query("SELECT * FROM employee", function (err, data) {
-    console.log(data);
-    if (err) throw err;
-    init();
-  });
-};
+// function updateRole() {
+//   db.query("SELECT * FROM employee", function (err, data) {
+//     console.table(data);
+//     if (err) throw err;
+//     init();
+//   });
+// };
 
 function viewRoles() {
   db.query("SELECT roles.id as ID, roles.title as title, department.name as Department, roles.salary as Salary  FROM roles LEFT JOIN department ON roles.department_id = department.id;", function (err, data) {
